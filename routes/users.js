@@ -5,10 +5,7 @@ let User = require('../constrollers/UserControllers');
 let upload = multer({dest:'./public/uploads/'}).single('file')
 let mutilUpload = multer({dest:'./public/uploads/'}).array('file',10)
 /* GET users listing. */
-router.post('/sendCode',User.sendCode);
-router.post('/sendCoreCode',User.sendCoreCode);
-router.post('/codePhoneLogin',User.codePhoneLogin);
-router.post('/loginAccess',User.loginAccess);
+
 router.post('/modifUserInfoAccess',User.modifUserInfoAccess);
 router.post('/modifUserNameAccess',User.modifUserNameAccess);
 router.post('/modifPwdAccess',User.modifPwdAccess);

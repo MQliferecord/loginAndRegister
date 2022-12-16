@@ -1,5 +1,5 @@
 let dbConf = require('../util/dbconfig');
-
+const formatDateTime = require('../formatDateTime')
 //查询用户
 let checkFollow = async (user_id,follow_id)=>{
     let sql = `select * from follower where user_id=? and follow_id=?`;
@@ -24,7 +24,7 @@ follow = (req,res)=>{
                 })
             }else{
                 let sql = `insert into follower(user_id,follow_id,create_time) values(?,?,?)`
-                let sqlArr = [user_id,follow_id,2022]
+                let sqlArr = [user_id,follow_id,formatDateTime(new Date())]
                 let result = await dbConf.sqlPromise(sql,sqlArr)
                 if(result.affectedRows == 1){
                     res.send({
