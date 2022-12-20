@@ -132,6 +132,8 @@ codeAndPhoneReg = async (req, res) => {
 //主体：用户名/手机号/邮箱登录
 loginAccess = async (req, res) => {
     let { username, email, phone, password } = req.query
+    console.log(username)
+    console.log(email)
     let phoneAcc = /^1[3456789]\d{9}$/
     let emailAcc = /^([a-zA-Z]|[0-9])(\w|-)+@[a-zA-Z0-9]+.([a-zA-Z0-9]{2,4})$/
 
