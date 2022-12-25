@@ -395,7 +395,7 @@ mutilFileUpload = (req, res) => {
             let { username } = req.query;
             let url = 'http://localhost:3000/uploads/' + file.originalname
             let sql = `insert into files(url,username,create_time) values(?,?,?)`
-            let sqlArr = [url, username, 2004]
+            let sqlArr = [url, username, formatDateTime(new Date())]
             dbConf.sqlConnect(sql, sqlArr, (err, data) => {
                 if (err) {
                     throw new Error(err)
