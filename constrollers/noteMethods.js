@@ -1,3 +1,4 @@
+const e = require('express')
 let dbConf = require('../util/dbconfig') 
 
 let addNote = async(content,dates,uid)=>{
@@ -30,9 +31,8 @@ let updateNote = async(content,dates,uid)=>{
         return 'reject'
     }
  }
-
 module.exports = {
     addNote,
     deleteNote,
-    updateNote,
+    updateNote
  }

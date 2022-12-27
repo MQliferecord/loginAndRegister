@@ -50,11 +50,6 @@ let modifUserName = async (username,phone)=>{
     let sql = `update user set username=? where phone=?`
     let sqlArr = [username,phone]
     let result = await dbConf.sqlPromise(sql,sqlArr)
-    /**
-     * 后续需要修改userinfo的表格，添加phone属性
-     * let sql = `update userinfo set username=? where phone=?`
-     * 这里为了先不影响后续的功能实现，先使用birthday修改userinfo里的username
-     * */
     let sqlUserInfo = `update userinfo set username=? where phone=?`
     let sqlArrUserInfo = [username,phone] 
     let resultUserInfo = await dbConf.sqlPromise(sqlUserInfo,sqlArrUserInfo)

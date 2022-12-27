@@ -153,7 +153,7 @@ loginAccess = async (req, res) => {
             result[0].userinfo = await USERINFO.getUserInfo(result[0].phone,'phone')
             console.log(result[0].userinfo)
             let token = jwt.sign(
-                { phone, password },
+                { phone},
                 jwtKey,
                 { expiresIn: 60 * 60 * 24 }
             )
@@ -178,7 +178,7 @@ loginAccess = async (req, res) => {
         } else {
             result[0].userinfo = await USERINFO.getUserInfo(result[0].email,'email')
             let token = jwt.sign(
-                { email, password },
+                { email},
                 jwtKey,
                 { expiresIn: 60 * 60 * 24 }
             )
@@ -202,7 +202,7 @@ loginAccess = async (req, res) => {
         } else {
             result[0].userinfo = await USERINFO.getUserInfo(result[0].username,'username')
             let token = jwt.sign(
-                { username, password },
+                { username},
                 jwtKey,
                 { expiresIn: 60 * 60 * 24 }
             )

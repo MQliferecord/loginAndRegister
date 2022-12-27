@@ -2,9 +2,9 @@ let dbConf = require('../util/dbconfig')
 let NOTEMETHODS = require('./noteMethods')
 //增
 addNote = (req,res)=>{
-    let {content,dates,_id} = req.body;
+    let {content,dates,id} = req.body;
     console.log(content)
-    NOTEMETHODS.addNote(content,dates,_id).then((value)=>{
+    NOTEMETHODS.addNote(content,dates,id).then((value)=>{
         if(value == 'success'){
             res.send({
                 'code':200,
@@ -20,8 +20,8 @@ addNote = (req,res)=>{
 }
 //删
 deleteNote = (req,res)=>{
-    let _id  = req.body._id;
-    NOTEMETHODS.deleteNote(_id).then((value)=>{
+    let id  = req.body.id;
+    NOTEMETHODS.deleteNote(id).then((value)=>{
         if(value == 'success'){
             res.send({
                 'code':200,
@@ -38,8 +38,8 @@ deleteNote = (req,res)=>{
 }
 //改
 updateNote = (req,res)=>{
-    let {content,dates,_id} = req.body
-    NOTEMETHODS.updateNote(content,dates,_id).then((value)=>{
+    let {content,dates,id} = req.body
+    NOTEMETHODS.updateNote(content,dates,id).then((value)=>{
         if(value == 'success'){
             res.send({
                 'code':200,
@@ -81,9 +81,9 @@ searchByContent = (req,res)=>{
 }
 //根据id精确查询
 searchById = (req,res)=>{
-    let _id = req.body._id
+    let id = req.body.id
     let sql = `select * from notes where uid=?`
-    let sqlArr = [_id]
+    let sqlArr = [id]
     dbConf.sqlConnect(sql,sqlArr,(err,result)=>{
         if(err){
             throw new Error(err)
@@ -106,8 +106,32 @@ searchById = (req,res)=>{
 }
 
 //分页查询
-searchbyList = (req,res)=>{
-
+searchByPageSize = (req,res)=>{
+    let {page,size} = req.body
+    let currentPage = parseInt(page)||1
+    let pageSize = parseInt(size)||15
+    let offset = (currentPage-1)*pageSize;
+    let sql = `select * from notes limit ?,?`
+    let sqlArr = [offset,pageSize]
+    dbConf.sqlConnect(sql,sqlArr,(err,result)=>{
+        if(err){
+            throw new Error(err)
+        }else{
+            if(result.length){
+                res.send({
+                    'code':200,
+                    'msg':'查询成功',
+                    'data':result
+                })
+            }else{
+                res.send({
+                    'code':400,
+                    'msg':'查询失败',
+                    'data':[]
+                })
+            }
+        }
+    })
 }
 
 module.exports = {
@@ -115,5 +139,6 @@ module.exports = {
     deleteNote,
     updateNote,
     searchByContent,
-    searchById
+    searchById,
+    searchByPageSize
 }
