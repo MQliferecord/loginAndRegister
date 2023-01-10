@@ -1,4 +1,4 @@
-### 你好，这是一个使用Nodejs+Express+Mysql实现的一个简单的后台登陆注册文件上传接口
+请使用 `nodemon app`运行
 
 功能有：
 
@@ -38,8 +38,8 @@ var params = {
 
 - 多文件上传
 
-更新：
+- 数据库的增删改
 
-增加notes页，实现数据库的增删改，模糊查询，精确查询以及分页查询
+- 模糊查询，精确查询以及分页查询
 
-由原先的只有post路由方法，增加get/delete/put方法
+关于其中notes的前端代码请点击->[vue3-nodes](https://github.com/MQliferecord/vue3-notes)
